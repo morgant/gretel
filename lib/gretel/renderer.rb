@@ -194,8 +194,14 @@ module Gretel
         end
 
         html = html_fragments.join(" ").html_safe
-        content_tag(options[:container_tag], html, id: options[:id], class: options[:class], itemscope: "", itemtype: "http://schema.org/BreadcrumbList")
-      end
+        
+        if options[:semantic]
+          content_tag(options[:container_tag], html, id: options[:id], class: options[:class], itemscope: "", itemtype: "https://schema.org/BreadcrumbList")
+        else
+          content_tag(options[:container_tag], html, id: options[:id], class: options[:class])
+        end
+
+     end
 
       alias :to_s :render
 
